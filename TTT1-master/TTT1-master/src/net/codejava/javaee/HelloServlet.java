@@ -39,19 +39,19 @@ public class HelloServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
 		{
-			/*
-		BAD CODE XSS
-		
 		PrintWriter out = response.getWriter();
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
 		
-		out.println("<h1>Hello " + username + "</h1>");
+		//BAD CODE XSS
+		/*out.println("<h1>Hello " + username + "</h1>");
 		out.println("<h1>Your Password: "+ password + "</h1>");
 		*/
 		//END OF BAD CODE XSS 
 		
+		
 		//Blacklisting xss code prevention
+	
 	/*	PrintWriter out=response.getWriter();
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
@@ -68,30 +68,18 @@ public class HelloServlet extends HttpServlet
 		
 		out.println("Blacklisting XSS prevention ");
 	
-		response.getWriter().write(Encode.forHtml("Helo " +user1 +"\n"));
-		response.getWriter().write(Encode.forHtml("Your Password : " +password1 ));
-*/
-	
-	
+    */
+		
 		//END OF BLACKLISTING XSS CODE PREVENTION
 		
 		//Whitelisting xss code prevention
-		PrintWriter out=response.getWriter();
-		String username=request.getParameter("username");
-		String password=request.getParameter("password");
-		Pattern pattern = Pattern.compile("[a-zA-Z0-9]*");
-		Matcher matcher = pattern.matcher(username);
-
-		
-		
+	/*	Pattern pattern = Pattern.compile("[a-zA-Z0-9]*");
+		Matcher matcher = pattern.matcher(username);		
 		if (matcher.matches()) 
 		{
 			out.println("Whitelisting Xss Prevent");
-			response.getWriter().write(Encode.forHtml("Helo " +username +"\n"));
-			response.getWriter().write(Encode.forHtml("Your Password  :" +password +"\n"));
-			
-	
-			
+			out.println("Hello Username :" + username +"\n");
+			out.println("Your Password :" + password);		
 		}
 		else
 		{
@@ -100,9 +88,15 @@ public class HelloServlet extends HttpServlet
 		out.println("Password: "+ "Please enter only alphabets and numbers");
 		
 		}
+		*/
 		//END OF WHITELISTING XSS CODE PREVENTION 
 		
-
+		//HTML Encoding Technique XSS Prevention
+		response.getWriter().write(Encode.forHtml("Hello " +username +"\n"));
+		response.getWriter().write(Encode.forHtml("Your Password  :" +password +"\n"));
+		
+		
+		//SQL Injection
 		
 		try {
 
